@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import CardList from './CardList';
+import Header from './Header';
+export default class App extends Component {
+  constructor() {
+
+    super()
+    this.state = {
+      robots: [],
+      
+      searchfeild: ''
+    }
+  }
+  componentDidMount(){
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(response => response.json())
+    .then(users => this.setState({ robots: users }))
+  }
+  onSearchChange=(event)=> {
+    this.setState({searchfeild:event.target.value})
+  }
+
+  render() {
+    const validation=()=>{
+    let filterRobots=this.state.robots.filter(robots =>{
+        return robots.name.toLowerCase().includes(this.state.searchfeild.toLowerCase())
+      });
+
+          return filterRobots;
+    }
+   
+
+    return (
+      <div className="tc">
+        <h1 className='logo'>RoboFriends</h1>
+        <Header searchChange= {this.onSearchChange} />
+        <div className="card-container">
+          <CardList robots={validation()} />
+        </div>
+      </div>
+    );
+  }
 }
 
-export default App;
