@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-robotarmy/static/css/main.1e524453.css",
+    "main.js": "/react-robotarmy/static/js/main.e4cf8517.js",
+    "index.html": "/react-robotarmy/index.html",
+    "main.1e524453.css.map": "/react-robotarmy/static/css/main.1e524453.css.map",
+    "main.e4cf8517.js.map": "/react-robotarmy/static/js/main.e4cf8517.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1e524453.css",
+    "static/js/main.e4cf8517.js"
+  ]
+}
