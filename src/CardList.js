@@ -1,17 +1,16 @@
 import React from 'react'
 import Card from './Card'
 
-const CardList = ({ robots }) => {
+const CardList = ({ publish}) => {
     return (
         <div>
             {
-                robots.map((user, i) => {
+                publish.map((user, i) => {
                     return (
-                        <Card key={i}
-                            id={robots[i].id}
-                            name={robots[i].name}
-                            email={robots[i].email} 
-                            />
+                        <Card  key={i}
+                        id={publish[i].id}
+                        name={publish[i].name}
+                        email={publish[i].email} />
                     );
                 })
             }

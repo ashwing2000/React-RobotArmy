@@ -1,45 +1,37 @@
-import React, { Component } from 'react';
+import React, { useState,useEffect } from 'react';
 
 import CardList from './CardList';
 import Header from './Header';
-export default class App extends Component {
-  constructor() {
 
-    super()
-    this.state = {
-      robots: [],
-      
-      searchfeild: ''
-    }
-  }
-  componentDidMount(){
-    fetch('https://jsonplaceholder.typicode.com/users')
-    .then(response => response.json())
-    .then(users => this.setState({ robots: users }))
-  }
-  onSearchChange=(event)=> {
-    this.setState({searchfeild:event.target.value})
+const App =() =>{
+  
+  const [publish,setPublish]=useState([]);
+  const [searchfeild,setSearchfeild]=useState('');
+
+ useEffect(()=>{
+  fetch('https://jsonplaceholder.typicode.com/users')
+  .then(response => response.json())
+  .then(products=> setPublish(products))
+ },[]) 
+
+
+  const onSearchChange=(event)=> {
+    setSearchfeild(event.target.value)
   }
 
-  render() {
-    const validation=()=>{
-    let filterRobots=this.state.robots.filter(robots =>{
-        return robots.name.toLowerCase().includes(this.state.searchfeild.toLowerCase())
-      });
 
-          return filterRobots;
-    }
-   
-
+    const fliterPosts=publish.filter(publish=>{
+      return publish.name.toLowerCase().includes(searchfeild.toLowerCase());
+    })
     return (
       <div className="tc">
         <h1 className='logo'>RoboFriends</h1>
-        <Header searchChange= {this.onSearchChange} />
+        <Header searchChange={onSearchChange} />
         <div className="card-container">
-          <CardList robots={validation()} />
+          <CardList publish={fliterPosts} />
         </div>
       </div>
     );
   }
-}
 
+export default App;
